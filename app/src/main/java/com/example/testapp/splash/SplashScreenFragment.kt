@@ -1,42 +1,33 @@
 package com.example.testapp.splash
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.example.testapp.BaseFragment
 import com.example.testapp.R
+import com.example.testapp.databinding.FragmentSplashScreenBinding
+import com.example.testapp.enum.Destinations
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SplashScreen.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SplashScreen : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class SplashScreen : BaseFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding : FragmentSplashScreenBinding
+
+
+    var navController: NavController?=null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        binding = FragmentSplashScreenBinding.inflate(inflater, container, false)
+        activity?.setContentView(binding.root)
 
         return inflater.inflate(R.layout.fragment_splash_screen, container, false)
     }
@@ -44,12 +35,30 @@ class SplashScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val run = Runnable {
-            NavHostFragment.findNavController(this).navigate(R.id.test_to_webView)
-        }
-        val handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(run, 1500)
+        navController = NavHostFragment.findNavController(this)
+
     }
 
+     override fun observeViewModel(){
 
+        mainActivitySharedViewModel.changeSplash.observe(viewLifecycleOwner) {
+
+            Log.d("AAA", "Is it work? $it")
+
+            if(it != Destinations.SPLASH.name){
+                when (it){
+                    Destinations.WEBVIEW.name ->{
+                        Log.d("AAA", "Are you sure?")
+                        navController?.navigate(R.id.action_Splash_to_WebViewFragment2)
+                    }
+                    Destinations.GAME.name ->{
+                        navController?.navigate(R.id.Splash_to_game)
+                    }
+                    else ->{
+
+                    }
+                }
+            }
+        }
+    }
 }

@@ -15,14 +15,9 @@
             android:id="@+id/Splash_to_game"
             app:destination="@+id/Game"
             />
-
         <action
-            android:id="@+id/splash_toWebView"
-            app:destination="@id/WebViewFragment"/>
-
-        <action
-            android:id="@+id/test_to_webView"
-            app:destination="@id/WebViewFragment"/>
+            android:id="@+id/action_Splash_to_WebViewFragment2"
+            app:destination="@id/WebViewFragment" />
 
     </fragment>
 
@@ -30,19 +25,15 @@
         android:id="@+id/Game"
         android:name="com.example.testapp.game.GameFragment"
         android:label="Game"
-        tools:layout="@layout/fragment_game"
-        >
-
-    </fragment>
+        tools:layout="@layout/fragment_game2"
+        />
 
     <fragment
         android:id="@+id/WebViewFragment"
         android:name="com.example.testapp.webview.WebViewFragment"
         android:label="WebView"
         tools:layout="@layout/fragment_web_view"
-        >
-
-    </fragment>
+        />
 
 
 

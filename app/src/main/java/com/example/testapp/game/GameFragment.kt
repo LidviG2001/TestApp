@@ -2,28 +2,16 @@ package com.example.testapp.game
 
 import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import com.example.testapp.MainActivity
-import com.example.testapp.OnClickHandlerInterface
+import androidx.fragment.app.Fragment
 import com.example.testapp.R
-import com.example.testapp.databinding.ActivityMainBinding
 import com.example.testapp.databinding.FragmentGame2Binding
-import com.example.testapp.databinding.FragmentGameBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [GameFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GameFragment : Fragment(), OnClickHandlerInterface {
 
     enum class Turn{
@@ -42,23 +30,10 @@ class GameFragment : Fragment(), OnClickHandlerInterface {
     private var boardList = mutableListOf<Button>()
 
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
         binding = FragmentGame2Binding.inflate(inflater, container, false)
         activity?.setContentView(binding.root)
@@ -80,7 +55,7 @@ class GameFragment : Fragment(), OnClickHandlerInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        Log.d("AAA", "Game is real")
     }
 
     private fun initBoard() {
@@ -149,7 +124,7 @@ class GameFragment : Fragment(), OnClickHandlerInterface {
     private fun match(button : Button, symbol : String) = button.text == symbol
 
     private fun result(title: String) {
-        val message = "\nNoughts $noughtsScore\n\nCrosses"
+        val message = "\nNoughts $noughtsScore\n\nCrosses $crossesScore"
         AlertDialog.Builder(requireContext())
             .setTitle(title)
             .setMessage(message)

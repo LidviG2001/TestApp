@@ -1,4 +1,4 @@
-package com.example.testapp
+package com.example.testapp.game
 
 import android.view.View
 
